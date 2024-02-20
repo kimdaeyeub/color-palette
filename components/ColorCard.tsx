@@ -4,7 +4,7 @@ import React from "react";
 const ColorCard = () => {
   return (
     <Link
-      href="/palette/12223"
+      href="/palettes/12223"
       className="w-full h-[300px] rounded-xl p-4 border flex flex-col justify-between items-center"
     >
       <div className="w-full h-[200px] bg-yellow-100 grid grid-cols-5">

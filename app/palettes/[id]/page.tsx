@@ -17,7 +17,7 @@ const PaletteDetail = () => {
       </div>
       <div className="w-full grid grid-cols-5 mt-10">
         <div className="w-full h-[200px] bg-red-400 flex justify-center items-center group">
-          <button className="group-hover:flex hidden px-5 py-2 text-white font-medium rounded-lg border-2 border-slate-300">
+          <button className="group-hover:flex hidden px-5 py-2 text-white font-medium rounded-lg border-2 border-white">
             Copy
           </button>
         </div>
