@@ -15,12 +15,12 @@ export default function Home() {
           src="/images/palettes.png"
           alt="bg_image"
         />
-        <div className="w-fit h-fit text-7xl font-extrabold absolute top-0 bottom-0 left-0 right-0 m-auto shadow-2xl">
+        <div className="w-fit h-fit text-7xl font-extrabold absolute top-0 bottom-0 left-0 right-0 m-auto shadow-2xl text-white">
           Creating with Color
         </div>
       </section>
-      <section className="w-full min-h-screen px-32 py-24 flex flex-col justify-center items-center">
-        <span className="text-6xl font-bold">Popular palette</span>
+      <section className="w-full min-h-screen px-32 py-24 flex flex-col justify-center items-center bg-blue-50">
+        <span className="text-7xl font-bold">Popular Palette</span>
         <div className="w-full grid grid-cols-3 gap-5 mt-20">
           <ColorCard />
           <ColorCard />
