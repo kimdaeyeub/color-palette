@@ -2,7 +2,15 @@
 import React, { useEffect, useState } from "react";
 import { Dancing_Script } from "next/font/google";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
+import {
+  ClientSafeProvider,
+  LiteralUnion,
+  getProviders,
+  signIn,
+  useSession,
+} from "next-auth/react";
+import Image from "next/image";
 
 const dancingScript = Dancing_Script({
   subsets: ["latin"],
@@ -11,6 +19,22 @@ const dancingScript = Dancing_Script({
 const Nav = () => {
   const [openDropDown, setOpenDropDown] = useState(false);
   const path = usePathname();
+  const params = useSearchParams();
+  const [providers, setProviders] = useState<Record<
+    LiteralUnion<string>,
+    ClientSafeProvider
+  > | null>(null);
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    const setUpProviders = async () => {
+      const response = await getProviders();
+
+      setProviders(response);
+    };
+
+    setUpProviders();
+  }, []);
   const onClickDropDownBtn = () => {
     setOpenDropDown(!openDropDown);
   };
@@ -27,18 +51,42 @@ const Nav = () => {
       </Link>
       <div className="flex justify-center items-center space-x-16 relative">
         <div className="flex justify-center items-center space-x-8">
-          <Link href="/palettes" className="text-gray-400 font-medium text-lg">
+          <Link
+            href="/palettes"
+            className={
+              "text-gray-400 font-medium text-lg" +
+              `${
+                path === "/palettes" && params.get("mode") === null
+                  ? " text-gray-800"
+                  : " text-gray-400"
+              }`
+            }
+          >
             All
           </Link>
           <Link
             href="/palettes?mode=dark"
-            className="text-gray-400 font-medium text-lg"
+            className={
+              "text-gray-400 font-medium text-lg" +
+              `${
+                path === "/palettes" && params.get("mode") === "dark"
+                  ? " text-gray-800"
+                  : " text-gray-400"
+              }`
+            }
           >
             Dark Theme
           </Link>
           <Link
             href="/palettes?mode=light"
-            className="text-gray-400 font-medium text-lg"
+            className={
+              "text-gray-400 font-medium text-lg" +
+              `${
+                path === "/palettes" && params.get("mode") === "light"
+                  ? " text-gray-800"
+                  : " text-gray-400"
+              }`
+            }
           >
             Light Theme
           </Link>
@@ -55,15 +103,28 @@ const Nav = () => {
             </Link>
           </div>
         )}
-        {true ? (
-          <div
+        {session?.user ? (
+          <Image
+            src={session?.user?.image!}
+            alt="profile_image"
+            width={500}
+            height={500}
             onClick={onClickDropDownBtn}
             className="w-14 h-14 rounded-full bg-red-400"
-          ></div>
+          />
         ) : (
-          <button className="px-6 py-2 rounded-lg bg-black text-white font-medium text-lg">
-            Login
-          </button>
+          <>
+            {providers &&
+              Object.values(providers).map((provider) => (
+                <button
+                  key={provider.name}
+                  onClick={() => signIn(provider.id)}
+                  className="px-6 py-2 rounded-lg bg-black text-white font-medium text-lg"
+                >
+                  Login
+                </button>
+              ))}
+          </>
         )}
       </div>
     </div>
