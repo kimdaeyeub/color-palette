@@ -1,4 +1,5 @@
 import ColorCard from "@/components/ColorCard";
+import PlusCard from "@/components/PlusCard";
 import React from "react";
 
 const page = () => {
@@ -24,6 +25,7 @@ const page = () => {
       </section>
       <div className="my-20 w-full h-1 bg-gray-100" />
       <div className="w-full grid grid-cols-3 gap-5">
+        <PlusCard />
         <ColorCard />
         <ColorCard />
         <ColorCard />
