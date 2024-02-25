@@ -26,10 +26,10 @@ const page = () => {
       <div className="my-20 w-full h-1 bg-gray-100" />
       <div className="w-full grid grid-cols-3 gap-5">
         <PlusCard />
+        {/* <ColorCard />
         <ColorCard />
         <ColorCard />
-        <ColorCard />
-        <ColorCard />
+        <ColorCard /> */}
       </div>
     </div>
   );

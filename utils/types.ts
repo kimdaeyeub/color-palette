@@ -4,3 +4,18 @@ export interface IUser {
   name: string;
   image: string;
 }
+
+interface ICreator {
+  _id: string;
+  email: string;
+  username: string;
+}
+
+export interface IPalette {
+  colors: string[];
+  _id: string;
+  description: string;
+  title: string;
+  likes: number;
+  creator: ICreator;
+}

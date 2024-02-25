@@ -50,7 +50,7 @@ const Form = () => {
           title,
           description,
           colors,
-          creator: session?.user.id,
+          userId: session?.user.id,
         }),
       });
 
@@ -66,7 +66,6 @@ const Form = () => {
     setColors(newArr);
   }, []);
 
-  console.log(clear);
   return (
     <div className="w-full h-full flex flex-col px-10 py-10 rounded-xl border-2 border-gray-400">
       <form onSubmit={handleSubmit}>

@@ -22,9 +22,9 @@ export default function Home() {
       <section className="w-full min-h-screen px-32 py-24 flex flex-col justify-center items-center bg-blue-50">
         <span className="text-7xl font-bold">Popular Palette</span>
         <div className="w-full grid grid-cols-3 gap-5 mt-20">
+          {/* <ColorCard />
           <ColorCard />
-          <ColorCard />
-          <ColorCard />
+          <ColorCard /> */}
         </div>
       </section>
     </>

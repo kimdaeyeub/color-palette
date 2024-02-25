@@ -1,23 +1,26 @@
 "use client";
 import ColorCard from "@/components/ColorCard";
+import { IPalette } from "@/utils/types";
 import { useSearchParams } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const page = () => {
+  const [palettes, setPalettes] = useState<IPalette[]>();
   const params = useSearchParams();
-  console.log(params.get("mode"));
+  useEffect(() => {
+    const fetchPalettes = async () => {
+      const response = await fetch("/api/palettes");
+      const data = await response.json();
+      setPalettes(data);
+    };
+
+    fetchPalettes();
+  }, []);
   return (
     <div className="w-full h-screen px-32 py-10 grid grid-cols-3 gap-5">
-      <ColorCard />
-      <ColorCard />
-      <ColorCard />
-      <ColorCard />
-      <ColorCard />
-      <ColorCard />
-      <ColorCard />
-      <ColorCard />
-      <ColorCard />
-      <ColorCard />
+      {palettes?.map((palette) => (
+        <ColorCard key={palette._id} palette={palette} />
+      ))}
     </div>
   );
 };
