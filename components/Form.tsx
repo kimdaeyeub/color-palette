@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from "react";
 import SelectBtn from "./SelectBtn";
 import ColorForm from "./ColorForm";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const Form = () => {
   const [clear, setClear] = useState(false);
@@ -10,6 +12,8 @@ const Form = () => {
   const [colors, setColors] = useState<string[]>([]);
   const [title, setTitle] = useState("");
   const [description, setDiscription] = useState("");
+  const { data: session } = useSession();
+  const router = useRouter();
   const onChangeSelectBtn = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const num = Number(e.target.value);
     if (num === 9) {
@@ -36,9 +40,26 @@ const Form = () => {
     setDiscription(e.target.value);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(colors, title, description);
+
+    try {
+      const response = await fetch("/api/palettes/new", {
+        method: "POST",
+        body: JSON.stringify({
+          title,
+          description,
+          colors,
+          creator: session?.user.id,
+        }),
+      });
+
+      if (response.ok) {
+        router.push("/palettes");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   useEffect(() => {
     const newArr = new Array(9).fill("");
@@ -48,7 +69,6 @@ const Form = () => {
   console.log(clear);
   return (
     <div className="w-full h-full flex flex-col px-10 py-10 rounded-xl border-2 border-gray-400">
-      {/* <SelectBtn /> */}
       <form onSubmit={handleSubmit}>
         <div className="mt-4 flex flex-col justify-center items-start w-full">
           <label className="text-lg font-medium">title</label>
