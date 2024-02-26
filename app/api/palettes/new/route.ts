@@ -3,13 +3,14 @@ import { connectToDB } from "@/utils/database";
 import { NextRequest } from "next/server";
 
 export const POST = async (req: NextRequest) => {
-  const { userId, title, description, colors } = await req.json();
+  const { theme, userId, title, description, colors } = await req.json();
   try {
     await connectToDB();
     const newPalette = new Palette({
       title,
       description,
       colors,
+      theme,
       creator: userId,
     });
 

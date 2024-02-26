@@ -21,6 +21,9 @@ const PaletteSchema = new Schema({
     type: [String],
     required: true,
   },
+  theme: {
+    type: String || null,
+  },
 });
 
 const Palette = models.Palette || model("Palette", PaletteSchema);

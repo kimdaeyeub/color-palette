@@ -5,6 +5,7 @@ import SelectBtn from "./SelectBtn";
 import ColorForm from "./ColorForm";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import RadioButton from "./RadioButton";
 
 const Form = () => {
   const [clear, setClear] = useState(false);
@@ -12,6 +13,7 @@ const Form = () => {
   const [colors, setColors] = useState<string[]>([]);
   const [title, setTitle] = useState("");
   const [description, setDiscription] = useState("");
+  const [darkMode, setDarkMode] = useState<null | boolean>(null);
   const { data: session } = useSession();
   const router = useRouter();
   const onChangeSelectBtn = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -40,6 +42,23 @@ const Form = () => {
     setDiscription(e.target.value);
   };
 
+  const toggleDarkMode = (val: string) => {
+    setDarkMode(!darkMode);
+    if (val === "light") {
+      if (!darkMode) {
+        setDarkMode(null);
+      } else {
+        setDarkMode(false);
+      }
+    } else {
+      if (darkMode) {
+        setDarkMode(null);
+      } else {
+        setDarkMode(true);
+      }
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -51,6 +70,7 @@ const Form = () => {
           description,
           colors,
           userId: session?.user.id,
+          theme: darkMode !== null ? (darkMode ? "dark" : "light") : null,
         }),
       });
 
@@ -88,7 +108,27 @@ const Form = () => {
           />
         </div>
         <div className="w-full mt-20 flex flex-col items-end justify-start">
-          <SelectBtn onChangeSelectBtn={onChangeSelectBtn} />
+          <div className="w-full flex justify-between items-center">
+            <div className="flex justify-center items-center space-x-6">
+              <div className="flex justify-center items-center space-x-3">
+                <span className="text-lg font-medium">Dark Theme</span>
+                <RadioButton
+                  val={"dark"}
+                  toggleDarkMode={toggleDarkMode}
+                  select={darkMode}
+                />
+              </div>
+              <div className="flex justify-center items-center space-x-3">
+                <span className="text-lg font-medium">Light Theme</span>
+                <RadioButton
+                  toggleDarkMode={toggleDarkMode}
+                  val={"light"}
+                  select={darkMode !== null ? !darkMode : darkMode}
+                />
+              </div>
+            </div>
+            <SelectBtn onChangeSelectBtn={onChangeSelectBtn} />
+          </div>
           <div className={`grid grid-cols-${gridValue} w-full mt-3 gap-4`}>
             {colors.map((color, index) => (
               <ColorForm
