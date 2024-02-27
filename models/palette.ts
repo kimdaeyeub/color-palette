@@ -21,6 +21,11 @@ const PaletteSchema = new Schema({
     type: [String],
     required: true,
   },
+  grid: {
+    type: Number,
+    default: 3,
+    required: true,
+  },
   theme: {
     type: String || null,
   },

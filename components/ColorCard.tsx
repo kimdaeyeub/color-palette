@@ -1,29 +1,19 @@
-"use client";
 import { IPalette } from "@/utils/types";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
 
 interface IProp {
   palette: IPalette;
 }
 
 const ColorCard = ({ palette }: IProp) => {
-  const [grid, setGrid] = useState(0);
-  useEffect(() => {
-    if (palette.colors.length === 9) {
-      setGrid(3);
-    } else if (palette.colors.length === 16) {
-      setGrid(4);
-    } else {
-      setGrid(5);
-    }
-  }, []);
   return (
     <Link
       href={`/palettes/${palette._id}`}
       className="w-full h-[300px] rounded-xl p-4 border flex flex-col justify-between items-center"
     >
-      <div className={`w-full h-[200px] bg-yellow-100 grid grid-cols-${grid}`}>
+      <div
+        className={`w-full h-[200px] bg-yellow-100 grid grid-cols-${palette.grid}`}
+      >
         {palette.colors.map((color) => (
           <div className="w-full" style={{ backgroundColor: color }} />
         ))}
@@ -32,7 +22,7 @@ const ColorCard = ({ palette }: IProp) => {
         <div className="flex flex-col justify-center items-start">
           <span className="text-lg font-medium">{palette.title}</span>
           <span className="font-medium text-gray-400">
-            {grid}x{grid}
+            {palette.grid}x{palette.grid}
           </span>
         </div>
         <div className="flex flex-col justify-center items-center">

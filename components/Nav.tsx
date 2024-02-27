@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Dancing_Script } from "next/font/google";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import {
@@ -11,10 +10,7 @@ import {
   useSession,
 } from "next-auth/react";
 import Image from "next/image";
-
-const dancingScript = Dancing_Script({
-  subsets: ["latin"],
-});
+import { dancingScript } from "@/utils/fonts";
 
 const Nav = () => {
   const [openDropDown, setOpenDropDown] = useState(false);

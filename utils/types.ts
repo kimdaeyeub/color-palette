@@ -9,6 +9,7 @@ interface ICreator {
   _id: string;
   email: string;
   username: string;
+  image: string;
 }
 
 export interface IPalette {
@@ -18,4 +19,6 @@ export interface IPalette {
   title: string;
   likes: number;
   creator: ICreator;
+  theme: string;
+  grid: number;
 }
