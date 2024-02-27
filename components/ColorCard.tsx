@@ -14,8 +14,12 @@ const ColorCard = ({ palette }: IProp) => {
       <div
         className={`w-full h-[200px] bg-yellow-100 grid grid-cols-${palette.grid}`}
       >
-        {palette.colors.map((color) => (
-          <div className="w-full" style={{ backgroundColor: color }} />
+        {palette.colors.map((color, index) => (
+          <div
+            className="w-full"
+            key={index}
+            style={{ backgroundColor: color }}
+          />
         ))}
       </div>
       <div className="w-full flex justify-between items-start mt-4">

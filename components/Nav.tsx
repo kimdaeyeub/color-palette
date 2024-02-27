@@ -92,7 +92,7 @@ const Nav = () => {
             <button className="w-full py-4 font-medium">로그아웃</button>
             <div className="h-0.5 w-2/3 bg-gray-300" />
             <Link
-              href="/profile/1234"
+              href={`/profile/${session?.user.id}`}
               className="w-full py-4 font-medium text-center"
             >
               프로필
