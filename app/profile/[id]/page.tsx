@@ -51,7 +51,7 @@ const page = ({ params }: { params: { id: string } }) => {
           </div>
           {params.id === session?.user.id ? (
             <Link
-              href={"/profile/edit"}
+              href={`/profile/${params.id}/edit`}
               className="rounded-full px-10 py-3 bg-black text-white text-lg font-medium"
             >
               Edit Profile

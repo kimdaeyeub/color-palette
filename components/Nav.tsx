@@ -7,6 +7,7 @@ import {
   LiteralUnion,
   getProviders,
   signIn,
+  signOut,
   useSession,
 } from "next-auth/react";
 import Image from "next/image";
@@ -89,7 +90,12 @@ const Nav = () => {
         </div>
         {openDropDown && (
           <div className="w-64 bg-gray-100 rounded-xl absolute top-full right-0 m-auto z-10 mt-4 flex flex-col justify-center items-center">
-            <button className="w-full py-4 font-medium">로그아웃</button>
+            <button
+              onClick={() => signOut()}
+              className="w-full py-4 font-medium"
+            >
+              로그아웃
+            </button>
             <div className="h-0.5 w-2/3 bg-gray-300" />
             <Link
               href={`/profile/${session?.user.id}`}
