@@ -3,6 +3,7 @@ export interface IUser {
   _id: string;
   username: string;
   image: string;
+  description: string;
 }
 
 interface ICreator {
@@ -10,6 +11,7 @@ interface ICreator {
   email: string;
   username: string;
   image: string;
+  description: string;
 }
 
 export interface IPalette {

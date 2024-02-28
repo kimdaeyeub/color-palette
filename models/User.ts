@@ -13,6 +13,10 @@ const userSchema = new Schema({
   image: {
     type: String,
   },
+  description: {
+    type: String,
+    default: "",
+  },
 });
 
 const User = models.User || model("User", userSchema);

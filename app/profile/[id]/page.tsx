@@ -4,6 +4,7 @@ import PlusCard from "@/components/PlusCard";
 import { IPalette, IUser } from "@/utils/types";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 const page = ({ params }: { params: { id: string } }) => {
@@ -26,20 +27,7 @@ const page = ({ params }: { params: { id: string } }) => {
 
     fetchUserPalettes();
 
-    if (session?.user.id !== params.id) {
-      fetchUserProfile();
-    } else {
-      if (session.user) {
-        const user = session!.user;
-        const data: IUser = {
-          username: user!.name!,
-          email: user!.email!,
-          _id: user!.id,
-          image: user!.image!,
-        };
-        setProfile(data);
-      }
-    }
+    fetchUserProfile();
   }, [session]);
 
   return (
@@ -58,13 +46,16 @@ const page = ({ params }: { params: { id: string } }) => {
           <div className="flex flex-col justify-start items-start">
             <span className="text-4xl font-semibold">{profile?.username}</span>
             <p className="text-balance w-4/5 mt-4 text-gray-400 font-medium">
-              {profile?.email}
+              {profile?.description}
             </p>
           </div>
           {params.id === session?.user.id ? (
-            <button className="rounded-full px-10 py-3 bg-black text-white text-lg font-medium">
+            <Link
+              href={"/profile/edit"}
+              className="rounded-full px-10 py-3 bg-black text-white text-lg font-medium"
+            >
               Edit Profile
-            </button>
+            </Link>
           ) : (
             <button className="rounded-full px-10 py-3 bg-black text-white text-lg font-medium">
               Follow
