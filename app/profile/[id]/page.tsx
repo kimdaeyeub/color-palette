@@ -29,7 +29,6 @@ const page = ({ params }: { params: { id: string } }) => {
 
     fetchUserProfile();
   }, [session]);
-
   return (
     <div className="min-h-screen px-32 py-20">
       <section className="grid grid-cols-3 gap-3 w-full">

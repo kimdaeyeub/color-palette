@@ -43,9 +43,9 @@ const Form = () => {
   };
 
   const toggleDarkMode = (val: string) => {
-    setDarkMode(!darkMode);
+    //setDarkMode(!darkMode);
     if (val === "light") {
-      if (!darkMode) {
+      if (!darkMode && darkMode !== null) {
         setDarkMode(null);
       } else {
         setDarkMode(false);
@@ -129,7 +129,12 @@ const Form = () => {
             </div>
             <SelectBtn onChangeSelectBtn={onChangeSelectBtn} />
           </div>
-          <div className={`grid grid-cols-${gridValue} w-full mt-3 gap-4`}>
+          <div
+            className={`grid  w-full mt-3 gap-4`}
+            style={{
+              gridTemplateColumns: `repeat(${gridValue}, minmax(0, 1fr))`,
+            }}
+          >
             {colors.map((color, index) => (
               <ColorForm
                 key={index}

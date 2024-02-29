@@ -75,7 +75,12 @@ const PaletteDetail = ({ params }: { params: { id: string } }) => {
         )}
       </div>
       {palette !== null && (
-        <div className={`w-full grid grid-cols-${palette.grid} mt-10`}>
+        <div
+          className={`w-full grid mt-10`}
+          style={{
+            gridTemplateColumns: `repeat(${palette.grid},minmax(0,1fr))`,
+          }}
+        >
           {palette.colors.map((color) => (
             <CopyColorCard color={color} key={color} />
           ))}

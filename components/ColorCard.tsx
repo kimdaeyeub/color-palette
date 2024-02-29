@@ -12,7 +12,8 @@ const ColorCard = ({ palette }: IProp) => {
       className="w-full h-[300px] rounded-xl p-4 border flex flex-col justify-between items-center"
     >
       <div
-        className={`w-full h-[200px] bg-yellow-100 grid grid-cols-${palette.grid}`}
+        className={`w-full h-[200px] bg-yellow-100 grid`}
+        style={{ gridTemplateColumns: `repeat(${palette.grid},minmax(0,1fr))` }}
       >
         {palette.colors.map((color, index) => (
           <div
