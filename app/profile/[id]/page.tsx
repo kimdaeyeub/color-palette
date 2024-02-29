@@ -43,7 +43,7 @@ const page = ({ params }: { params: { id: string } }) => {
           />
         )}
         <div className="flex flex-col justify-between items-start col-span-2">
-          <div className="flex flex-col justify-start items-start">
+          <div className="w-full flex flex-col justify-start items-start">
             <span className="text-4xl font-semibold">{profile?.username}</span>
             <p className="text-balance w-4/5 mt-4 text-gray-400 font-medium">
               {profile?.description}

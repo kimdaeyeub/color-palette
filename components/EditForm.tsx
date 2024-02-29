@@ -1,7 +1,7 @@
 "use client";
 import { IUser } from "@/utils/types";
 import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 interface IProp {
@@ -13,10 +13,24 @@ const EditForm = ({ id }: IProp) => {
   const [email, setEmail] = useState("");
   const [description, setDescription] = useState("");
   const { data: session } = useSession();
+  const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const updateData = { username: name, email, description };
+    try {
+      const response = await fetch(`/api/profile/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify(updateData),
+      });
+
+      if (response.ok) {
+        console.log("Good");
+        router.push(`/profile/${id}`);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   useEffect(() => {
     if (!session?.user) {
@@ -35,7 +49,10 @@ const EditForm = ({ id }: IProp) => {
     }
   }, []);
   return (
-    <form className="flex flex-col justify-center items-center w-2/3 border-2 border-gray-800 px-20 py-10 rounded-xl space-y-5">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col justify-center items-center w-2/3 border-2 border-gray-800 px-20 py-10 rounded-xl space-y-5"
+    >
       <div className="flex flex-col space-y-3 w-full">
         <label className="font-medium">이름</label>
         <input
