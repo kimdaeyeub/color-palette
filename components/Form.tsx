@@ -3,19 +3,20 @@
 import React, { useEffect, useState } from "react";
 import SelectBtn from "./SelectBtn";
 import ColorForm from "./ColorForm";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import RadioButton from "./RadioButton";
+import { useFormState } from "react-dom";
+import { handleSubmit } from "@/utils/functions";
+
+interface IProp {
+  handleSubmit: (formData: FormData) => void;
+}
 
 const Form = () => {
+  const [state, formAction] = useFormState(handleSubmit, null);
+  const router = useRouter();
   const [clear, setClear] = useState(false);
   const [gridValue, setGridValue] = useState<number>(3);
   const [colors, setColors] = useState<string[]>([]);
-  const [title, setTitle] = useState("");
-  const [description, setDiscription] = useState("");
-  const [darkMode, setDarkMode] = useState<null | boolean>(null);
-  const { data: session } = useSession();
-  const router = useRouter();
   const onChangeSelectBtn = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const num = Number(e.target.value);
     if (num === 9) {
@@ -35,66 +36,26 @@ const Form = () => {
       setClear(true);
     }
   };
-  const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.target.value);
-  };
-  const onChangeDescription = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setDiscription(e.target.value);
-  };
 
-  const toggleDarkMode = (val: string) => {
-    //setDarkMode(!darkMode);
-    if (val === "light") {
-      if (!darkMode && darkMode !== null) {
-        setDarkMode(null);
-      } else {
-        setDarkMode(false);
-      }
-    } else {
-      if (darkMode) {
-        setDarkMode(null);
-      } else {
-        setDarkMode(true);
-      }
-    }
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    try {
-      const response = await fetch("/api/palettes/new", {
-        method: "POST",
-        body: JSON.stringify({
-          title,
-          description,
-          colors,
-          userId: session?.user.id,
-          theme: darkMode !== null ? (darkMode ? "dark" : "light") : null,
-        }),
-      });
-
-      if (response.ok) {
-        router.push("/palettes");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
   useEffect(() => {
     const newArr = new Array(9).fill("");
     setColors(newArr);
   }, []);
+  useEffect(() => {
+    if (state) {
+      router.push("/palettes");
+    }
+  }, [state]);
 
   return (
     <div className="w-full h-full flex flex-col px-10 py-10 rounded-xl border-2 border-gray-400">
-      <form onSubmit={handleSubmit}>
+      <form action={formAction}>
         <div className="mt-4 flex flex-col justify-center items-start w-full">
           <label className="text-lg font-medium">title</label>
           <input
+            name="title"
             type="text"
             required
-            onChange={onChangeTitle}
             placeholder="title"
             className="w-full outline-none bg-gray-200 border border-gray-400 px-4 py-2 rounded-lg mt-3"
           />
@@ -102,7 +63,7 @@ const Form = () => {
         <div className="mt-6 flex flex-col justify-center items-start w-full">
           <label className="text-lg font-medium">description</label>
           <textarea
-            onChange={onChangeDescription}
+            name="description"
             className="rounded-xl resize-none bg-gray-200 border border-gray-400 w-full outline-none px-4 py-2 mt-3"
             rows={4}
           />
@@ -112,18 +73,20 @@ const Form = () => {
             <div className="flex justify-center items-center space-x-6">
               <div className="flex justify-center items-center space-x-3">
                 <span className="text-lg font-medium">Dark Theme</span>
-                <RadioButton
-                  val={"dark"}
-                  toggleDarkMode={toggleDarkMode}
-                  select={darkMode}
+                <input
+                  type="radio"
+                  value={"dark"}
+                  name="theme"
+                  className="w-8 h-8"
                 />
               </div>
               <div className="flex justify-center items-center space-x-3">
                 <span className="text-lg font-medium">Light Theme</span>
-                <RadioButton
-                  toggleDarkMode={toggleDarkMode}
-                  val={"light"}
-                  select={darkMode !== null ? !darkMode : darkMode}
+                <input
+                  type="radio"
+                  value={"light"}
+                  name="theme"
+                  className="w-8 h-8"
                 />
               </div>
             </div>

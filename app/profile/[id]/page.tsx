@@ -64,7 +64,7 @@ const page = ({ params }: { params: { id: string } }) => {
       </section>
       <div className="my-20 w-full h-1 bg-gray-100" />
       <div className="w-full grid grid-cols-3 gap-5">
-        <PlusCard />
+        {session?.user.id === params.id && <PlusCard />}
         {palettes?.map((palette, index) => (
           <ColorCard palette={palette} key={index} />
         ))}

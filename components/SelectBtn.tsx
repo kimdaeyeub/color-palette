@@ -5,6 +5,8 @@ const SelectBtn = ({ onChangeSelectBtn }: IProp) => {
   return (
     <div className="bg-black px-6 rounded-xl w-fit">
       <select
+        name="select"
+        defaultValue={9}
         onChange={onChangeSelectBtn}
         className="px-3 py-4 bg-black text-white outline-none text-center"
       >

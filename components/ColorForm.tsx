@@ -32,6 +32,7 @@ const ColorForm = ({ index, setColors, colors, clear, setClear }: IProp) => {
         placeholder="Color code. ex)#3498db"
         className="w-full px-4 py-2 outline-none bg-transparent border-b-2 border-black"
         value={colorCode}
+        name={index.toString()}
         onChange={onChangeColorCode}
         required
       />

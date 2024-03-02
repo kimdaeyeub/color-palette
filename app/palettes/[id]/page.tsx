@@ -1,29 +1,23 @@
-"use client";
-
 import CopyColorCard from "@/components/CopyColorCard";
+import LikesBtn from "@/components/LikesBtn";
+import { api_url } from "@/utils/constants";
 import { dancingScript } from "@/utils/fonts";
 import { IPalette } from "@/utils/types";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
-const PaletteDetail = ({ params }: { params: { id: string } }) => {
-  const { data: session } = useSession();
-  const [palette, setPalette] = useState<IPalette | null>(null);
+const getPaletteDetail = async (id: string) => {
+  const response = await fetch(`${api_url}/palettes/${id}`);
+  const json = await response.json();
+  return json;
+};
 
-  useEffect(() => {
-    const fetchPalettes = async () => {
-      const response = await fetch(`/api/palettes/${params.id}`);
-      const json = await response.json();
-      setPalette(json);
-    };
-
-    fetchPalettes();
-  }, []);
-
-  console.log(session?.user.id === palette?.creator._id);
-
+const PaletteDetail = async ({
+  params: { id },
+}: {
+  params: { id: string };
+}) => {
+  const palette: IPalette = await getPaletteDetail(id);
   return (
     <div className="px-32 pt-10 mb-48 flex flex-col w-full">
       <div className="w-full flex justify-between items-center">
@@ -48,31 +42,7 @@ const PaletteDetail = ({ params }: { params: { id: string } }) => {
             <span className="text-gray-400">Likes {palette?.likes}</span>
           </div>
         </div>
-        {session?.user.id !== palette?.creator._id ? (
-          <button className="px-5 py-3 bg-pink-600 text-white rounded-xl text-lg font-medium flex justify-center items-center space-x-3">
-            <span>Likes</span>
-            <svg
-              data-slot="icon"
-              fill="none"
-              strokeWidth="2"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-              width={30}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
-              ></path>
-            </svg>
-          </button>
-        ) : (
-          <button className="px-5 py-3 bg-black text-white rounded-xl text-lg font-medium flex justify-center items-center space-x-3">
-            Edit Palette
-          </button>
-        )}
+        <LikesBtn id={palette?.creator._id!} />
       </div>
       {palette !== null && (
         <div
@@ -81,8 +51,8 @@ const PaletteDetail = ({ params }: { params: { id: string } }) => {
             gridTemplateColumns: `repeat(${palette.grid},minmax(0,1fr))`,
           }}
         >
-          {palette.colors.map((color) => (
-            <CopyColorCard color={color} key={color} />
+          {palette.colors.map((color, index) => (
+            <CopyColorCard color={color} key={index} />
           ))}
         </div>
       )}
