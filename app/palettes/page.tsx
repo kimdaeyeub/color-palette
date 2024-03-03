@@ -26,7 +26,7 @@ const Palettes = async ({
   const [all, light, dark]: [
     all: IPalette[],
     light: IPalette[],
-    dark: IPalette[]
+    dark: IPalette[],
   ] = await Promise.all([
     getAllPalettes(),
     getLightPalettes(),

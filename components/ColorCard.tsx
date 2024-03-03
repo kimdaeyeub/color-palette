@@ -30,7 +30,7 @@ const ColorCard = ({ palette }: IProp) => {
             {palette.grid}x{palette.grid}
           </span>
         </div>
-        <div className="flex flex-col justify-center items-center">
+        {/*<div className="flex flex-col justify-center items-center">
           <svg
             data-slot="icon"
             width={30}
@@ -47,9 +47,9 @@ const ColorCard = ({ palette }: IProp) => {
             ></path>
           </svg>
           <span className="text-gray-400 font-medium text-sm">
-            {palette.likes}
+            Likes {palette.likes}
           </span>
-        </div>
+        </div>*/}
       </div>
     </Link>
   );

@@ -1,8 +1,9 @@
 import CopyColorCard from "@/components/CopyColorCard";
-import LikesBtn from "@/components/LikesBtn";
+import PaletteBtn from "@/components/PaletteBtn";
 import { api_url } from "@/utils/constants";
 import { dancingScript } from "@/utils/fonts";
 import { IPalette } from "@/utils/types";
+import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -17,6 +18,7 @@ const PaletteDetail = async ({
 }: {
   params: { id: string };
 }) => {
+  const session = await getServerSession();
   const palette: IPalette = await getPaletteDetail(id);
   return (
     <div className="px-32 pt-10 mb-48 flex flex-col w-full">
@@ -42,7 +44,12 @@ const PaletteDetail = async ({
             <span className="text-gray-400">Likes {palette?.likes}</span>
           </div>
         </div>
-        <LikesBtn id={palette?.creator._id!} />
+        {session?.user && (
+          <PaletteBtn
+            creatorId={palette?.creator._id!}
+            paletteId={palette._id}
+          />
+        )}
       </div>
       {palette !== null && (
         <div

@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
-const page = ({ params }: { params: { id: string } }) => {
+const Profile = ({ params }: { params: { id: string } }) => {
   const { data: session } = useSession();
   const [profile, setProfile] = useState<IUser | null>(null);
   const [palettes, setPalettes] = useState<IPalette[] | null>(null);
@@ -73,4 +73,4 @@ const page = ({ params }: { params: { id: string } }) => {
   );
 };
 
-export default page;
+export default Profile;

@@ -17,6 +17,11 @@ const userSchema = new Schema({
     type: String,
     default: "",
   },
+  likes: {
+    type: [Schema.Types.ObjectId],
+    ref: "Palette",
+    default: [],
+  },
 });
 
 const User = models.User || model("User", userSchema);
