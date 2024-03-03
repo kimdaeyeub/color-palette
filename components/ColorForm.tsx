@@ -6,9 +6,17 @@ interface IProp {
   setClear: Dispatch<SetStateAction<boolean>>;
   colors: string[];
   clear: boolean;
+  prevColor?: string;
 }
 
-const ColorForm = ({ index, setColors, colors, clear, setClear }: IProp) => {
+const ColorForm = ({
+  prevColor,
+  index,
+  setColors,
+  colors,
+  clear,
+  setClear,
+}: IProp) => {
   const [colorCode, setColorCode] = useState("");
   const onChangeColorCode = (e: React.ChangeEvent<HTMLInputElement>) => {
     setColorCode(e.target.value);
@@ -20,6 +28,9 @@ const ColorForm = ({ index, setColors, colors, clear, setClear }: IProp) => {
     if (clear) {
       setColorCode("");
       setClear(false);
+    }
+    if (prevColor) {
+      setColorCode(prevColor);
     }
   }, [clear]);
   return (

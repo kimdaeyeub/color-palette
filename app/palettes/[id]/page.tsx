@@ -1,17 +1,11 @@
 import CopyColorCard from "@/components/CopyColorCard";
 import PaletteBtn from "@/components/PaletteBtn";
-import { api_url } from "@/utils/constants";
 import { dancingScript } from "@/utils/fonts";
+import { getPaletteDetail } from "@/utils/functions";
 import { IPalette } from "@/utils/types";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
-
-const getPaletteDetail = async (id: string) => {
-  const response = await fetch(`${api_url}/palettes/${id}`);
-  const json = await response.json();
-  return json;
-};
 
 const PaletteDetail = async ({
   params: { id },

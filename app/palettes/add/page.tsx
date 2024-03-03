@@ -1,8 +1,4 @@
 import Form from "@/components/Form";
-import { getServerSession } from "next-auth";
-import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
-import React from "react";
 
 const page = () => {
   return (

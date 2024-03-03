@@ -3,6 +3,7 @@
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 import LikeBtn from "./LikeBtn";
+import Link from "next/link";
 
 interface IProp {
   creatorId: string;
@@ -49,9 +50,17 @@ const PaletteBtn = ({ creatorId, paletteId }: IProp) => {
           <LikeBtn text={"Likes"} onClickLikesBtn={onClickLikesBtn} />
         )
       ) : (
-        <button className="px-5 py-3 bg-black text-white rounded-xl text-lg font-medium flex justify-center items-center space-x-3">
-          Edit Palette
-        </button>
+        <div className="flex justify-center items-center space-x-4">
+          <button className="px-5 py-3 bg-red-700 text-white rounded-xl text-lg font-medium flex justify-center items-center space-x-3">
+            Delete
+          </button>
+          <Link
+            href={`/palettes/${paletteId}/edit`}
+            className="px-5 py-3 bg-black text-white rounded-xl text-lg font-medium flex justify-center items-center space-x-3"
+          >
+            Edit Palette
+          </Link>
+        </div>
       )}
     </div>
   );

@@ -38,7 +38,6 @@ export const PATCH = async (
 
     const updatedUser = await profile.save();
 
-    console.log(updatedUser);
     return new Response(JSON.stringify(updatedUser));
   } catch (error) {
     console.log(error);

@@ -1,5 +1,6 @@
 import User from "@/models/User";
 import Palette from "@/models/palette";
+import { connectToDB } from "@/utils/database";
 import { getServerSession } from "next-auth";
 import { NextRequest } from "next/server";
 
@@ -7,6 +8,7 @@ export const POST = async (
   req: NextRequest,
   { params: { id } }: { params: { id: string } },
 ) => {
+  await connectToDB();
   const { creatorId, paletteId, userId } = await req.json();
   if (!userId) {
     return new Response(JSON.stringify({ message: "User does not exist" }));

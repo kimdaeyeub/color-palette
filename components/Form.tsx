@@ -5,14 +5,33 @@ import SelectBtn from "./SelectBtn";
 import ColorForm from "./ColorForm";
 import { useRouter } from "next/navigation";
 import { useFormState } from "react-dom";
-import { handleSubmit } from "@/utils/functions";
+import { addPaletteSubmit, editPaletteSubmit } from "@/utils/functions";
 
 interface IProp {
-  handleSubmit: (formData: FormData) => void;
+  title?: string;
+  description?: string;
+  edit?: boolean;
+  prevColors?: string[];
+  theme?: string;
+  id?: string;
 }
 
-const Form = () => {
-  const [state, formAction] = useFormState(handleSubmit, null);
+const Form = ({ theme, title, description, edit, prevColors, id }: IProp) => {
+  const [addState, addFormAction] = useFormState(addPaletteSubmit, null);
+  const editPaletteSubmitWithId = async (
+    prevState: any,
+    formData: FormData,
+  ) => {
+    // 여기에서 postId를 사용하여 editPaletteSubmit 함수를 호출합니다.
+    if (edit) {
+      return await editPaletteSubmit(prevState, formData, id!);
+    }
+  };
+
+  const [editState, editFormAction] = useFormState(
+    editPaletteSubmitWithId,
+    null,
+  );
   const router = useRouter();
   const [clear, setClear] = useState(false);
   const [gridValue, setGridValue] = useState<number>(3);
@@ -42,19 +61,20 @@ const Form = () => {
     setColors(newArr);
   }, []);
   useEffect(() => {
-    if (state) {
+    if (addState || editState) {
       router.push("/palettes");
     }
-  }, [state]);
+  }, [addState, editState]);
 
   return (
     <div className="w-full h-full flex flex-col px-10 py-10 rounded-xl border-2 border-gray-400">
-      <form action={formAction}>
+      <form action={edit ? editFormAction : addFormAction}>
         <div className="mt-4 flex flex-col justify-center items-start w-full">
           <label className="text-lg font-medium">title</label>
           <input
             name="title"
             type="text"
+            defaultValue={title}
             required
             placeholder="title"
             className="w-full outline-none bg-gray-200 border border-gray-400 px-4 py-2 rounded-lg mt-3"
@@ -64,6 +84,7 @@ const Form = () => {
           <label className="text-lg font-medium">description</label>
           <textarea
             name="description"
+            defaultValue={description}
             className="rounded-xl resize-none bg-gray-200 border border-gray-400 w-full outline-none px-4 py-2 mt-3"
             rows={4}
           />
@@ -77,6 +98,7 @@ const Form = () => {
                   type="radio"
                   value={"dark"}
                   name="theme"
+                  defaultChecked={theme === "dark"}
                   className="w-8 h-8"
                 />
               </div>
@@ -86,6 +108,7 @@ const Form = () => {
                   type="radio"
                   value={"light"}
                   name="theme"
+                  defaultChecked={theme === "light"}
                   className="w-8 h-8"
                 />
               </div>
@@ -106,6 +129,7 @@ const Form = () => {
                 setClear={setClear}
                 setColors={setColors}
                 colors={colors}
+                prevColor={prevColors ? prevColors[index] : undefined}
               />
             ))}
           </div>
