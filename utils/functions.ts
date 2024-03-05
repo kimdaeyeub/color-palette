@@ -48,8 +48,7 @@ export const addPaletteSubmit = async (prevState: any, formData: FormData) => {
     });
 
     if (response.ok) {
-      revalidatePath("/palettes");
-      revalidatePath(`/profile/${user[0]._id.toString()}`);
+      revalidatePath("/");
       return true;
     }
   } catch (error) {
@@ -77,12 +76,6 @@ export const editProfile = async (prevState: any, formData: FormData) => {
     console.log(error);
     return false;
   }
-};
-
-export const getPaletteDetail = async (id: string) => {
-  const response = await fetch(`${api_url}/palettes/${id}`);
-  const json = await response.json();
-  return json;
 };
 
 export const editPaletteSubmit = async (

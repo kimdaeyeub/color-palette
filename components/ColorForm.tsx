@@ -32,7 +32,7 @@ const ColorForm = ({
     if (prevColor) {
       setColorCode(prevColor);
     }
-  }, [clear]);
+  }, [clear, setClear, prevColor]);
   return (
     <div
       className={`w-full aspect-video border border-black rounded-lg flex justify-center items-center p-5`}

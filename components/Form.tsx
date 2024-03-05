@@ -64,7 +64,7 @@ const Form = ({ theme, title, description, edit, prevColors, id }: IProp) => {
     if (addState || editState) {
       router.push("/palettes");
     }
-  }, [addState, editState]);
+  }, [addState, editState, router]);
 
   return (
     <div className="w-full h-full flex flex-col px-10 py-10 rounded-xl border-2 border-gray-400">

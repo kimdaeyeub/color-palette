@@ -2,13 +2,11 @@ import React from "react";
 
 interface IProp {
   text: string;
-  onClickLikesBtn: () => Promise<void>;
 }
 
-const LikeBtn = ({ text, onClickLikesBtn }: IProp) => {
+const LikeBtn = async ({ text }: IProp) => {
   return (
     <button
-      onClick={onClickLikesBtn}
       className={`px-5 py-3 ${
         text === "Likes" ? "bg-pink-600" : "bg-black"
       } text-white rounded-xl text-lg font-medium flex justify-center items-center space-x-3`}

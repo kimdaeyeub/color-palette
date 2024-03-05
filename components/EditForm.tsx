@@ -18,7 +18,7 @@ const EditForm = ({ id, username, email, description }: IProp) => {
     if (state) {
       router.push(`/profile/${id}`);
     }
-  }, [state]);
+  }, [state, id, router]);
   return (
     <form
       action={formAction}

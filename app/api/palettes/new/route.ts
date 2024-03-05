@@ -26,7 +26,7 @@ export const POST = async (req: NextRequest) => {
     });
 
     await newPalette.save();
-    return new Response(JSON.stringify(newPalette), { status: 201 });
+    return new Response(JSON.stringify(newPalette));
   } catch (error) {
     console.log(error);
     return new Response("Failes", { status: 500 });
