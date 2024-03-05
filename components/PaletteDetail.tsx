@@ -2,20 +2,23 @@ import { getPaletteDetail } from "@/utils/getPaletteAction";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
-import React, { Suspense } from "react";
 import PaletteBtn from "./PaletteBtn";
 import CopyColorCard from "./CopyColorCard";
 import { dancingScript } from "@/utils/fonts";
+import { redirect } from "next/navigation";
 
 const PaletteDetail = async ({ id }: { id: string }) => {
   const session = await getServerSession();
   const palette = await getPaletteDetail(id);
+  if (!palette) {
+    redirect("/palettes");
+  }
   return (
     <>
       <div className="w-full flex justify-between items-center">
         <div className="flex justify-start items-center space-x-4">
           {palette?.creator.image ? (
-            <Link href={`/profile/${palette.creator._id}`}>
+            <Link href={`/profile/${palette?.creator._id}`}>
               <Image
                 src={palette?.creator.image}
                 alt="profile_image"
@@ -42,10 +45,10 @@ const PaletteDetail = async ({ id }: { id: string }) => {
         <div
           className={`w-full grid mt-10`}
           style={{
-            gridTemplateColumns: `repeat(${palette.grid},minmax(0,1fr))`,
+            gridTemplateColumns: `repeat(${palette?.grid},minmax(0,1fr))`,
           }}
         >
-          {palette.colors.map((color: string, index: any) => (
+          {palette?.colors.map((color: string, index: any) => (
             <CopyColorCard color={color} key={index} />
           ))}
         </div>

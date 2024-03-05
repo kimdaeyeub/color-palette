@@ -1,5 +1,5 @@
 import Form from "@/components/Form";
-import { getPaletteDetail } from "@/utils/functions";
+import { getPaletteDetail } from "@/utils/getPaletteAction";
 import { IPalette } from "@/utils/types";
 
 const EditPalette = async ({ params: { id } }: { params: { id: string } }) => {

@@ -1,12 +1,11 @@
 import EditForm from "@/components/EditForm";
-import { api_url } from "@/utils/constants";
+import User from "@/models/User";
 import { getUser } from "@/utils/functions";
 import { redirect } from "next/navigation";
 
 const fetchUserProfile = async (id: string) => {
-  const response = await fetch(`${api_url}/profile/${id}`);
-  const json = await response.json();
-  return json;
+  const user = await User.findById(id);
+  return user;
 };
 
 const EditProfilePage = async ({

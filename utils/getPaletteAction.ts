@@ -1,7 +1,6 @@
 "use server";
 import Palette from "@/models/palette";
 import { connectToDB } from "./database";
-import { revalidatePath } from "next/cache";
 
 export async function getAllPalettes() {
   try {
@@ -35,22 +34,6 @@ export const getPaletteDetail = async (id: string) => {
     await connectToDB();
     const palette = await Palette.findById(id).populate("creator");
     return palette;
-  } catch (error) {
-    throw new Error(`${error}`);
-  }
-};
-
-export const deletePaletteAction = async (
-  prevState: any,
-  formData: FormData,
-) => {
-  "use server";
-  try {
-    await connectToDB();
-    const id = formData.get("id");
-    //await Palette.findByIdAndDelete(id);
-    revalidatePath("/palettes");
-    return true;
   } catch (error) {
     throw new Error(`${error}`);
   }
