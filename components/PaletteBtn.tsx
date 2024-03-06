@@ -29,18 +29,16 @@ const PaletteBtn = async ({ creatorId, paletteId }: IProp) => {
   const user = await getUser();
   const id = user[0]._id.toString();
   const isLiked = await getLike({ creatorId, paletteId, sessionId: id });
-  console.log(isLiked);
   return (
     <div>
       {id !== creatorId?.toString() ? (
         <LikeBtn isLiked={isLiked} userId={id} paletteId={paletteId} />
       ) : (
         <div className="flex justify-center items-center space-x-4">
-          {/*TODO: delete api 추가하기*/}
           <DeletePaletteBtn id={paletteId} />
           <Link
             href={`/palettes/${paletteId}/edit`}
-            className="px-5 py-3 bg-black text-white rounded-xl text-lg font-medium flex justify-center items-center space-x-3"
+            className="hidden sm:px-5 px-3 sm:py-3 py-2 bg-black text-white sm:rounded-xl rounded-md text-lg sm:font-medium md:flex justify-center items-center space-x-3"
           >
             Edit Palette
           </Link>

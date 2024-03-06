@@ -9,10 +9,10 @@ const ColorCard = ({ palette }: IProp) => {
   return (
     <Link
       href={`/palettes/${palette._id}`}
-      className="w-full h-[300px] rounded-xl p-4 border flex flex-col justify-between items-center"
+      className="w-full min-h-[300px] lg:aspect-auto aspect-square rounded-xl p-4 border flex flex-col justify-between items-center"
     >
       <div
-        className={`w-full h-[200px] bg-yellow-100 grid`}
+        className={`w-full min-h-[200px] h-full bg-yellow-100 grid`}
         style={{ gridTemplateColumns: `repeat(${palette.grid},minmax(0,1fr))` }}
       >
         {palette.colors.map((color, index) => (

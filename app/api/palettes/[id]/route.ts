@@ -63,7 +63,6 @@ export const DELETE = async (
     const user = await getUser();
     const userId = user[0]._id.toString();
     const palette = await Palette.findById(id).populate("creator");
-    console.log(palette.creator._id.toString());
     if (palette.creator._id.toString() === userId) {
       await Palette.findByIdAndDelete(id);
       revalidatePath("/palettes");

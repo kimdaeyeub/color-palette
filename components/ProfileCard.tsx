@@ -23,20 +23,22 @@ const ProfileCard = async ({ id }: IProp) => {
   const user: IUser[] = await getUser();
 
   return (
-    <section className="grid grid-cols-3 gap-3 w-full">
+    <section className="grid md:grid-cols-3 grid-cols-1 md:gap-12 w-full">
       {profile && (
-        <Image
-          src={profile!.image}
-          alt="profile_image"
-          width={300}
-          height={300}
-          className="bg-red-300 w-80 h-80 rounded-full"
-        />
+        <div className="w-full flex justify-center items-center">
+          <Image
+            src={profile!.image}
+            alt="profile_image"
+            width={300}
+            height={300}
+            className="bg-red-300 md:w-full w-40 aspect-square rounded-full"
+          />
+        </div>
       )}
-      <div className="flex flex-col justify-between items-start col-span-2">
-        <div className="w-full flex flex-col justify-start items-start">
+      <div className="flex flex-col justify-between md:items-start items-center space-y-12 col-span-2 mt-12">
+        <div className="w-full flex flex-col justify-start md:items-start items-center">
           <span className="text-4xl font-semibold">{profile?.username}</span>
-          <p className="text-balance w-4/5 mt-4 text-gray-400 font-medium">
+          <p className="md:text-start text-center w-4/5 mt-4 text-gray-400 font-medium">
             {profile?.description}
           </p>
         </div>

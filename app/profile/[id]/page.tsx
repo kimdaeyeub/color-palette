@@ -18,10 +18,10 @@ const Profile = async ({ params: { id } }: { params: { id: string } }) => {
 
   const user: IUser[] = await getUser();
   return (
-    <div className="min-h-screen px-32 py-20">
+    <div className="min-h-screen xl:px-32 md:px-20 sm:px-12 px-6 py-20">
       <ProfileCard id={id} />
       <div className="my-20 w-full h-1 bg-gray-100" />
-      <div className="w-full grid grid-cols-3 gap-5">
+      <div className="w-full grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
         {user[0] && user[0]._id.toString() === id && <PlusCard />}
         {palettes?.map((palette: IPalette, index: number) => (
           <ColorCard palette={palette} key={index} />

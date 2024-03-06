@@ -1,27 +1,30 @@
+import PopularPalette from "@/components/PopularPalette";
 import Image from "next/image";
-
+//TODO: server actions함수 정리할 것
 export default function Home() {
   return (
     <>
-      <section className="min-h-screen w-full flex justify-center items-center bg-blue-100 relative">
-        {/* <div>
-          <h1 className="text-6xl font-bold">색상선정을 위한 최고의 선택</h1>
-        </div> */}
-        <Image
-          width={1000}
-          height={1000}
-          className="w-full h-full"
-          src="/images/palettes.png"
-          alt="bg_image"
-        />
-        <div className="w-fit h-fit text-7xl font-extrabold absolute top-0 bottom-0 left-0 right-0 m-auto shadow-2xl text-white">
-          Creating with Color
+      <section className="md:h-screen min-h-fit w-full relative">
+        <div className="w-full h-full grid grid-cols-4 bg-red-400">
+          <div className="w-full h-full min-h-[200px] bg-[#ff6b6b]"></div>
+          <div className="w-full h-full min-h-[200px] bg-[#10ac84]"></div>
+          <div className="w-full h-full min-h-[200px] bg-[#5f27cd]"></div>
+          <div className="w-full h-full min-h-[200px] bg-[#222f3e]"></div>
+          <div className="w-full h-full min-h-[200px] bg-[#00d2d3]"></div>
+          <div className="w-full h-full min-h-[200px] bg-[#feca57]"></div>
+          <div className="w-full h-full min-h-[200px] bg-[#ff9f43]"></div>
+          <div className="w-full h-full min-h-[200px] bg-[#ED4C67]"></div>
+          <div className="w-full h-full min-h-[200px] bg-[#6F1E51]"></div>
+          <div className="w-full h-full min-h-[200px] bg-[#006266]"></div>
+          <div className="w-full h-full min-h-[200px] bg-[#5758BB]"></div>
+        </div>
+        <div className="absolute top-0 bottom-0 right-0 left-0 m-auto w-fit h-fit">
+          <span className="xl:text-[160px] lg:text-[120px] md:text-[70px] text-[50px] font-bold text-white text-center">
+            Create Palette
+          </span>
         </div>
       </section>
-      <section className="w-full min-h-screen px-32 py-24 flex flex-col justify-center items-center bg-blue-50">
-        <span className="text-7xl font-bold">Popular Palette</span>
-        <div className="w-full grid grid-cols-3 gap-5 mt-20"></div>
-      </section>
+      <PopularPalette />
     </>
   );
 }

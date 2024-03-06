@@ -58,7 +58,7 @@ const PaletteDetail = async ({ id }: { id: string }) => {
         <h1 className={"text-6xl font-bold " + dancingScript.className}>
           {palette?.title}
         </h1>
-        <p className="w-2/3 text-center mb-32 text-lg font-medium">
+        <p className="md:w-2/3 w-full text-center text-lg font-medium">
           {palette?.description}
         </p>
       </div>

@@ -3,8 +3,8 @@ import { Suspense } from "react";
 
 const page = async ({ params: { id } }: { params: { id: string } }) => {
   return (
-    <div className="px-32 pt-10 mb-48 flex flex-col w-full">
-      <Suspense fallback={<div>Loading...</div>}>
+    <div className="xl:px-32 md:px-20 sm:px-16 px-8 pt-10 md:mb-32 sm:mb-20 mb-16 flex flex-col w-full">
+      <Suspense fallback={<div className="h-screen"></div>}>
         <PaletteDetail id={id} />
       </Suspense>
     </div>

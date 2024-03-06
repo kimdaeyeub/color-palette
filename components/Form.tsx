@@ -90,33 +90,33 @@ const Form = ({ theme, title, description, edit, prevColors, id }: IProp) => {
           />
         </div>
         <div className="w-full mt-20 flex flex-col items-end justify-start">
-          <div className="w-full flex justify-between items-center">
+          <div className="w-full flex md:flex-row flex-col space-y-4 mb-4 justify-between items-center">
             <div className="flex justify-center items-center space-x-6">
-              <div className="flex justify-center items-center space-x-3">
-                <span className="text-lg font-medium">Dark Theme</span>
+              <div className="flex justify-center items-center md:space-x-3 space-x-1">
+                <span className="xl:text-lg font-medium">Dark Theme</span>
                 <input
                   type="radio"
                   value={"dark"}
                   name="theme"
                   defaultChecked={theme === "dark"}
-                  className="w-8 h-8"
+                  className="xl:w-8 xl:h-8 w-6 h-6"
                 />
               </div>
               <div className="flex justify-center items-center space-x-3">
-                <span className="text-lg font-medium">Light Theme</span>
+                <span className="xl:text-lg font-medium">Light Theme</span>
                 <input
                   type="radio"
                   value={"light"}
                   name="theme"
                   defaultChecked={theme === "light"}
-                  className="w-8 h-8"
+                  className="xl:w-8 xl:h-8 w-6 h-6"
                 />
               </div>
             </div>
             <SelectBtn onChangeSelectBtn={onChangeSelectBtn} />
           </div>
           <div
-            className={`grid  w-full mt-3 gap-4`}
+            className={`sm:grid flex flex-col w-full mt-3 gap-4`}
             style={{
               gridTemplateColumns: `repeat(${gridValue}, minmax(0, 1fr))`,
             }}

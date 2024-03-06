@@ -22,7 +22,7 @@ const EditForm = ({ id, username, email, description }: IProp) => {
   return (
     <form
       action={formAction}
-      className="flex flex-col justify-center items-center w-2/3 border-2 border-gray-800 px-20 py-10 rounded-xl space-y-5"
+      className="flex flex-col justify-center items-center lg:w-2/3 w-full border-2 border-gray-800 md:px-20 px-8 py-10 rounded-xl space-y-5"
     >
       <div className="flex flex-col space-y-3 w-full">
         <label className="font-medium">이름</label>

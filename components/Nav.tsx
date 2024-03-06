@@ -39,15 +39,15 @@ const Nav = () => {
     setOpenDropDown(false);
   }, [path]);
   return (
-    <div className="w-full py-5 px-32 flex justify-between items-center">
+    <div className="w-full md:py-5 py-3 xl:px-32 md:px-14 px-8 flex justify-between items-center">
       <Link
         href="/"
-        className={"text-5xl font-bold " + dancingScript.className}
+        className={"md:text-5xl text-3xl font-bold " + dancingScript.className}
       >
         Palette
       </Link>
       <div className="flex justify-center items-center space-x-16 relative">
-        <div className="flex justify-center items-center space-x-8">
+        <div className="hidden md:flex justify-center items-center space-x-8">
           <Link
             href="/palettes"
             className={
@@ -102,6 +102,13 @@ const Nav = () => {
               className="w-full py-4 font-medium text-center"
             >
               프로필
+            </Link>
+            <div className="md:hidden block h-0.5 w-2/3 bg-gray-300" />
+            <Link
+              href="/palettes"
+              className="block md:hidden w-full py-4 font-medium text-center"
+            >
+              All palette
             </Link>
           </div>
         )}
