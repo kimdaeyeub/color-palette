@@ -1,6 +1,10 @@
 import PopularPalette from "@/components/PopularPalette";
-import Image from "next/image";
-//TODO: server actions함수 정리할 것
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Palette",
+};
+
 export default function Home() {
   return (
     <>
@@ -18,9 +22,12 @@ export default function Home() {
           <div className="w-full h-full min-h-[200px] bg-[#006266]"></div>
           <div className="w-full h-full min-h-[200px] bg-[#5758BB]"></div>
         </div>
-        <div className="absolute top-0 bottom-0 right-0 left-0 m-auto w-fit h-fit">
+        <div className="absolute top-0 bottom-0 right-0 left-0 m-auto w-fit h-fit flex flex-col justify-center items-center">
           <span className="xl:text-[160px] lg:text-[120px] md:text-[70px] text-[50px] font-bold text-white text-center">
-            Create Palette
+            Share your
+          </span>
+          <span className="xl:text-[160px] lg:text-[120px] md:text-[70px] text-[50px] font-bold text-white text-center">
+            Palettes
           </span>
         </div>
       </section>

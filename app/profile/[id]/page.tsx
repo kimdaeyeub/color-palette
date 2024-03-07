@@ -4,7 +4,12 @@ import ProfileCard from "@/components/ProfileCard";
 import { api_url } from "@/utils/constants";
 import { getUser } from "@/utils/functions";
 import { IPalette, IUser } from "@/utils/types";
+import { Metadata } from "next";
 import { getServerSession } from "next-auth";
+
+export const metadata: Metadata = {
+  title: "Profile",
+};
 
 const getPalettes = async (id: string) => {
   const response = await fetch(`${api_url}/profile/${id}/palettes`);

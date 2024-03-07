@@ -1,7 +1,12 @@
 import EditForm from "@/components/EditForm";
 import User from "@/models/User";
 import { getUser } from "@/utils/functions";
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
+
+export const metadata: Metadata = {
+  title: "Edit Profile",
+};
 
 const fetchUserProfile = async (id: string) => {
   const user = await User.findById(id);

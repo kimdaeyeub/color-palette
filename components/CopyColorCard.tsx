@@ -12,7 +12,7 @@ const CopyColorCard = ({ color }: IProp) => {
     setCopied(color);
     setTimeout(() => {
       setCopied("");
-    }, 500);
+    }, 600);
   };
   return (
     <div
