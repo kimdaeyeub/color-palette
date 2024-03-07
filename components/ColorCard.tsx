@@ -8,16 +8,17 @@ interface IProp {
 const ColorCard = ({ palette }: IProp) => {
   return (
     <Link
+      prefetch
       href={`/palettes/${palette._id}`}
       className="w-full min-h-[300px] lg:aspect-auto aspect-square rounded-xl p-4 border flex flex-col justify-between items-center"
     >
       <div
-        className={`w-full min-h-[200px] h-full bg-yellow-100 grid`}
+        className={`w-full grid`}
         style={{ gridTemplateColumns: `repeat(${palette.grid},minmax(0,1fr))` }}
       >
         {palette.colors.map((color, index) => (
           <div
-            className="w-full"
+            className="w-full aspect-video"
             key={index}
             style={{ backgroundColor: color }}
           />

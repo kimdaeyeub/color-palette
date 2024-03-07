@@ -6,21 +6,13 @@ export interface IUser {
   description: string;
 }
 
-interface ICreator {
-  _id: string;
-  email: string;
-  username: string;
-  image: string;
-  description: string;
-}
-
 export interface IPalette {
   colors: string[];
   _id: string;
   description: string;
   title: string;
   likes: number;
-  creator: ICreator;
+  creator: IUser;
   theme: string;
   grid: number;
 }

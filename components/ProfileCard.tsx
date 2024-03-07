@@ -1,16 +1,21 @@
-import { api_url } from "@/utils/constants";
+import User from "@/models/User";
+import { connectToDB } from "@/utils/database";
 import { getUser } from "@/utils/functions";
 import { IUser } from "@/utils/types";
-import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 const fetchUserProfile = async (id: string) => {
-  const response = await fetch(`${api_url}/profile/${id}`);
-  const json = await response.json();
+  try {
+    await connectToDB();
 
-  return json;
+    const user = await User.findById(id);
+
+    return user;
+  } catch (error) {
+    throw new Error(`${error}`);
+  }
 };
 
 interface IProp {
@@ -19,7 +24,6 @@ interface IProp {
 
 const ProfileCard = async ({ id }: IProp) => {
   const profile = await fetchUserProfile(id);
-  const session = await getServerSession();
   const user: IUser[] = await getUser();
 
   return (
