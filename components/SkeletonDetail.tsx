@@ -1,6 +1,6 @@
 import React from "react";
 
-const SuspenseDetail = () => {
+const SkeletonDetail = () => {
   return (
     <>
       <div className="animate-pulse w-full flex justify-between items-center">
@@ -26,4 +26,4 @@ const SuspenseDetail = () => {
   );
 };
 
-export default SuspenseDetail;
+export default SkeletonDetail;

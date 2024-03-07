@@ -10,15 +10,15 @@ const ColorCard = ({ palette }: IProp) => {
     <Link
       prefetch
       href={`/palettes/${palette._id}`}
-      className="w-full min-h-[300px] lg:aspect-auto aspect-square rounded-xl p-4 border flex flex-col justify-between items-center"
+      className="w-full min-h-[300px] lg:aspect-auto aspect-square rounded-xl p-4 border-2 flex flex-col justify-between items-center"
     >
       <div
-        className={`w-full grid`}
+        className={`w-full grid lg:aspect-video aspect-square`}
         style={{ gridTemplateColumns: `repeat(${palette.grid},minmax(0,1fr))` }}
       >
         {palette.colors.map((color, index) => (
           <div
-            className="w-full aspect-video"
+            className="w-full h-full"
             key={index}
             style={{ backgroundColor: color }}
           />

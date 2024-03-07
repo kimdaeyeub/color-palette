@@ -122,7 +122,20 @@ const Nav = () => {
             className="w-14 h-14 rounded-full bg-red-400"
           />
         ) : (
-          <>
+          <div className="flex justify-center items-center">
+            <Link
+              href="/palettes"
+              className={
+                "block md:hidden text-gray-400 font-medium text-lg mr-6" +
+                `${
+                  path === "/palettes" && params.get("mode") === null
+                    ? " text-gray-800"
+                    : " text-gray-400"
+                }`
+              }
+            >
+              All
+            </Link>
             {providers &&
               Object.values(providers).map((provider) => (
                 <button
@@ -133,7 +146,7 @@ const Nav = () => {
                   Login
                 </button>
               ))}
-          </>
+          </div>
         )}
       </div>
     </div>

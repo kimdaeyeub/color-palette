@@ -24,7 +24,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Provider>
-          <Suspense fallback={<div>Loading..</div>}>
+          <Suspense fallback={<div></div>}>
             <Nav />
           </Suspense>
           {children}
