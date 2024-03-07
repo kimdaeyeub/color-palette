@@ -10,7 +10,7 @@ const ColorCard = ({ palette }: IProp) => {
     <Link
       prefetch
       href={`/palettes/${palette._id}`}
-      className="w-full min-h-[300px] lg:aspect-auto aspect-square rounded-xl p-4 border-2 flex flex-col justify-between items-center"
+      className="w-full min-h-[300px] h-full lg:aspect-auto aspect-square rounded-xl p-4 border-2 flex flex-col justify-between items-center"
     >
       <div
         className={`w-full grid lg:aspect-video aspect-square`}
