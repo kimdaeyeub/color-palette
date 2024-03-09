@@ -17,7 +17,7 @@ const popularPalette = async () => {
 const PopularPalette = async () => {
   const palettes = await popularPalette();
   return (
-    <section className="w-full min-h-screen xl:px-32 md:px-20 sm:px-16 px-8 py-24 flex flex-col justify-center items-center bg-blue-50">
+    <section className="w-full min-h-screen h-full xl:px-32 md:px-20 sm:px-16 px-8 py-24 flex flex-col justify-center items-center bg-blue-50">
       <span className="lg:text-7xl md:text-6xl text-5xl font-bold w-full text-center">
         Popular Palette
       </span>
