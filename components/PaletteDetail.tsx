@@ -38,7 +38,10 @@ const PaletteDetail = async ({ id }: { id: string }) => {
           </div>
         </div>
         {session?.user && (
-          <PaletteBtn creatorId={palette?.creator._id!} paletteId={id} />
+          <>
+            <span>{session?.user.name}</span>
+            <PaletteBtn creatorId={palette?.creator._id!} paletteId={id} />
+          </>
         )}
       </div>
       {palette !== null && (
