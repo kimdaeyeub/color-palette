@@ -27,22 +27,26 @@ const getLike = async ({
 
 const PaletteBtn = async ({ creatorId, paletteId }: IProp) => {
   const user = await getUser();
-  const id = user[0]._id.toString();
-  const isLiked = await getLike({ creatorId, paletteId, sessionId: id });
+  const userId = user[0]._id.toString();
+  const isLiked = await getLike({ creatorId, paletteId, sessionId: userId });
   return (
     <div>
-      {id !== creatorId?.toString() ? (
-        <LikeBtn isLiked={isLiked} userId={id} paletteId={paletteId} />
-      ) : (
-        <div className="flex justify-center items-center space-x-4">
-          <DeletePaletteBtn id={paletteId} />
-          <Link
-            href={`/palettes/${paletteId}/edit`}
-            className="hidden sm:px-5 px-3 sm:py-3 py-2 bg-black text-white sm:rounded-xl rounded-md text-lg sm:font-medium md:flex justify-center items-center space-x-3"
-          >
-            Edit Palette
-          </Link>
-        </div>
+      {userId && (
+        <>
+          {userId !== creatorId?.toString() ? (
+            <LikeBtn isLiked={isLiked} userId={userId} paletteId={paletteId} />
+          ) : (
+            <div className="flex justify-center items-center space-x-4">
+              <DeletePaletteBtn id={paletteId} />
+              <Link
+                href={`/palettes/${paletteId}/edit`}
+                className="hidden sm:px-5 px-3 sm:py-3 py-2 bg-black text-white sm:rounded-xl rounded-md text-lg sm:font-medium md:flex justify-center items-center space-x-3"
+              >
+                Edit Palette
+              </Link>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
