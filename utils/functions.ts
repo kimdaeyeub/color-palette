@@ -76,7 +76,7 @@ export const editProfile = async (prevState: any, formData: FormData) => {
 export const editPaletteSubmit = async (
   prevState: any,
   formData: FormData,
-  id: string,
+  id: string
 ) => {
   const title = formData.get("title");
   const description = formData.get("description");

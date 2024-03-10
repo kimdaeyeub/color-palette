@@ -1,43 +1,12 @@
-"use client";
-import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
-import {
-  ClientSafeProvider,
-  LiteralUnion,
-  getProviders,
-  signIn,
-  signOut,
-  useSession,
-} from "next-auth/react";
-import Image from "next/image";
 import { dancingScript } from "@/utils/fonts";
+import NavLink from "./NavLink";
+import LoginBtn from "./LoginBtn";
+import NavProfileImage from "./NavProfileImage";
+import { getUser } from "@/utils/functions";
 
-const Nav = () => {
-  const [openDropDown, setOpenDropDown] = useState(false);
-  const path = usePathname();
-  const params = useSearchParams();
-  const [providers, setProviders] = useState<Record<
-    LiteralUnion<string>,
-    ClientSafeProvider
-  > | null>(null);
-  const { data: session } = useSession();
-
-  useEffect(() => {
-    const setUpProviders = async () => {
-      const response = await getProviders();
-
-      setProviders(response);
-    };
-
-    setUpProviders();
-  }, []);
-  const onClickDropDownBtn = () => {
-    setOpenDropDown(!openDropDown);
-  };
-  useEffect(() => {
-    setOpenDropDown(false);
-  }, [path]);
+const Nav = async () => {
+  const user = await getUser();
   return (
     <div className="w-full md:py-5 py-3 xl:px-32 md:px-14 px-8 flex justify-between items-center">
       <Link
@@ -48,105 +17,21 @@ const Nav = () => {
       </Link>
       <div className="flex justify-center items-center space-x-16 relative">
         <div className="hidden md:flex justify-center items-center space-x-8">
-          <span>{session?.user.name}</span>
-          <Link
-            href="/palettes"
-            className={
-              "text-gray-400 font-medium text-lg" +
-              `${
-                path === "/palettes" && params.get("mode") === null
-                  ? " text-gray-800"
-                  : " text-gray-400"
-              }`
-            }
-          >
-            All
-          </Link>
-          <Link
-            href="/palettes?mode=dark"
-            className={
-              "text-gray-400 font-medium text-lg" +
-              `${
-                path === "/palettes" && params.get("mode") === "dark"
-                  ? " text-gray-800"
-                  : " text-gray-400"
-              }`
-            }
-          >
-            Dark Theme
-          </Link>
-          <Link
-            href="/palettes?mode=light"
-            className={
-              "text-gray-400 font-medium text-lg" +
-              `${
-                path === "/palettes" && params.get("mode") === "light"
-                  ? " text-gray-800"
-                  : " text-gray-400"
-              }`
-            }
-          >
-            Light Theme
-          </Link>
+          <NavLink mode={null} />
+
+          <NavLink mode={"dark"} />
+
+          <NavLink mode={"light"} />
         </div>
-        {openDropDown && (
-          <div className="w-64 bg-gray-100 rounded-xl absolute top-full right-0 m-auto z-10 mt-4 flex flex-col justify-center items-center">
-            <button
-              onClick={() => signOut()}
-              className="w-full py-4 font-medium"
-            >
-              로그아웃
-            </button>
-            <div className="h-0.5 w-2/3 bg-gray-300" />
-            <Link
-              href={`/profile/${session?.user.id}`}
-              className="w-full py-4 font-medium text-center"
-            >
-              프로필
-            </Link>
-            <div className="md:hidden block h-0.5 w-2/3 bg-gray-300" />
-            <Link
-              href="/palettes"
-              className="block md:hidden w-full py-4 font-medium text-center"
-            >
-              All palette
-            </Link>
-          </div>
-        )}
-        {session?.user ? (
-          <Image
-            src={session?.user?.image!}
-            alt="profile_image"
-            width={500}
-            height={500}
-            onClick={onClickDropDownBtn}
-            className="w-14 h-14 rounded-full bg-red-400"
+        {user.length !== 0 ? (
+          <NavProfileImage
+            imageUrl={user[0].image}
+            userId={user[0]._id.toString()}
           />
         ) : (
           <div className="flex justify-center items-center">
-            <Link
-              href="/palettes"
-              className={
-                "block md:hidden text-gray-400 font-medium text-lg mr-6" +
-                `${
-                  path === "/palettes" && params.get("mode") === null
-                    ? " text-gray-800"
-                    : " text-gray-400"
-                }`
-              }
-            >
-              All
-            </Link>
-            {providers &&
-              Object.values(providers).map((provider) => (
-                <button
-                  key={provider.name}
-                  onClick={() => signIn(provider.id)}
-                  className="px-6 py-2 rounded-lg bg-black text-white font-medium text-lg"
-                >
-                  Login
-                </button>
-              ))}
+            <NavLink mode={null} responsive />
+            <LoginBtn />
           </div>
         )}
       </div>
