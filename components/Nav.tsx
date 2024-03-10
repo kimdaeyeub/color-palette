@@ -48,6 +48,7 @@ const Nav = () => {
       </Link>
       <div className="flex justify-center items-center space-x-16 relative">
         <div className="hidden md:flex justify-center items-center space-x-8">
+          <span>{session?.user.name}</span>
           <Link
             href="/palettes"
             className={
