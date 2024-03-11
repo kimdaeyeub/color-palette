@@ -20,7 +20,7 @@ const ColorCards = async ({ mode }: IProp) => {
     palettes = await getAllPalettes();
   }
   return (
-    <div className="w-full h-full grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5">
+    <div className="w-full h-full grid 2xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5">
       {palettes?.map((palette: IPalette, index: number) => (
         <ColorCard key={index} palette={palette} />
       ))}

@@ -20,7 +20,7 @@ const UserPalettes = async ({ id }: { id: string }) => {
   const palettes: any[] = await getPalettes(id);
   const user = await getUser();
   return (
-    <div className="w-full grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
+    <div className="w-full grid 2xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
       {user[0] && user[0]._id.toString() === id && <PlusCard />}
       {palettes.map((palette: IPalette, index: number) => (
         <ColorCard palette={palette} key={index} />

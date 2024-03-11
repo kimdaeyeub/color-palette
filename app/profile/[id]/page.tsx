@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 const Profile = ({ params: { id } }: { params: { id: string } }) => {
   return (
-    <div className="min-h-screen xl:px-32 md:px-20 sm:px-12 px-6 py-20">
+    <div className="min-h-screen xl:px-32 md:px-20 sm:px-12 px-6 py-20 mb-40">
       <Suspense fallback={<SkeletonProfileCard />}>
         <ProfileCard id={id} />
       </Suspense>
