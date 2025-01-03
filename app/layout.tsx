@@ -11,7 +11,10 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: {
     template: "%s | Palette",
-    default: "Palette",
+    default: "Color Palettes for Developers",
+  },
+  verification: {
+    google: "cwiFwSNi7XWYd2f2LAHNn4Klwf17ebD_55VRkgtU9Ew",
   },
 };
 
