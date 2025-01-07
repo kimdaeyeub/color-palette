@@ -23,10 +23,12 @@ export const addPaletteSubmit = async (prevState: any, formData: FormData) => {
     colors.push(formData.get(`${i}`));
   }
   const user: IUser[] = await getUser();
-  if (!user) {
-    throw new Error("로그아웃 상태입니다.");
+  let userId = "";
+  if (user.length === 0) {
+    userId = process.env.USER_ID!;
+  } else {
+    userId = user[0]._id.toString();
   }
-  const userId = user[0]._id.toString();
   const theme = formData.get("theme");
   let grid = 3;
   if (Number(select) === 16) {

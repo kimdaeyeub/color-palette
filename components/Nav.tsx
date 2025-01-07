@@ -7,6 +7,7 @@ import { getUser } from "@/utils/functions";
 
 const Nav = async () => {
   const user = await getUser();
+
   return (
     <div className="w-full md:py-5 py-3 xl:px-32 md:px-14 px-8 flex justify-between items-center">
       <Link
@@ -22,6 +23,12 @@ const Nav = async () => {
           <NavLink mode={"dark"} />
 
           <NavLink mode={"light"} />
+          <Link
+            href="/palettes/add"
+            className="text-gray-400 font-medium text-lg"
+          >
+            Add Palette
+          </Link>
         </div>
         {user.length !== 0 ? (
           <NavProfileImage
