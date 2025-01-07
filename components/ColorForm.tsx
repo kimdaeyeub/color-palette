@@ -41,7 +41,7 @@ const ColorForm = ({
       <input
         type="text"
         placeholder="Color code. ex)#3498db"
-        className="w-full px-4 py-2 outline-none bg-transparent border-b-2 border-black"
+        className="w-full px-4 py-2 outline-none bg-transparent border-b-2 border-black placeholder:text-slate-500"
         value={colorCode}
         name={index.toString()}
         onChange={onChangeColorCode}
