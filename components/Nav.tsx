@@ -13,7 +13,7 @@ const Nav = async () => {
         href="/"
         className={"md:text-5xl text-3xl font-bold " + dancingScript.className}
       >
-        Palette
+        Color Palette
       </Link>
       <div className="flex justify-center items-center space-x-16 relative">
         <div className="hidden md:flex justify-center items-center space-x-8">
